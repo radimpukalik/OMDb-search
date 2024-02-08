@@ -26,7 +26,7 @@ const MovieDetails: FC<Props> = ({
 
   const getMovieRequest = async (clickedMovieId: string) => {
     setIsDetailLoading(true);
-    const detailUrl = `http://www.omdbapi.com/?i=${clickedMovieId}&apikey=d318cf92`;
+    const detailUrl = `https://www.omdbapi.com/?i=${clickedMovieId}&apikey=d318cf92`;
 
     const response = await fetch(detailUrl);
     const responseJson = await response.json();

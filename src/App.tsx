@@ -19,7 +19,7 @@ const App: FC = () => {
   const [movieListPage, setMovieListPage] = useState<number>(1);
   const [totalMovieResult, setTotalMovieResult] = useState<number>(1);
 
-  const searchUrl = `http://www.omdbapi.com/?s=${searchValue}&page=${movieListPage}&apikey=d318cf92`;
+  const searchUrl = `https://www.omdbapi.com/?s=${searchValue}&page=${movieListPage}&apikey=d318cf92`;
   const { data: movies } = useMovieFetch(
     searchUrl,
     [searchValue, movieListPage],
