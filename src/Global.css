@@ -1,0 +1,18 @@
+body {
+    color: #ffffff;
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0; 
+    background-color: black;
+    padding-top: 120px;
+}
+
+.header-container {
+    background: #141414;
+}
+
+@media (max-width: 580px) {
+    body {
+        padding-top: 210px;
+    }
+}
