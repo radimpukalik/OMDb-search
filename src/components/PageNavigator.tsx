@@ -1,22 +1,29 @@
 import { FC } from "react";
-import "./MovieList.css";
+import useGameQueryStore from "../store";
+import "../styles/MovieList.css";
 
 interface Props {
-  totalMovieResult: number;
-  movieListPage: number;
-  setMovieListPage: React.Dispatch<React.SetStateAction<number>>;
+  page: number;
+  minPage: number;
+  maxPage: number;
 }
 
-const Pages: FC<Props> = ({ totalMovieResult, movieListPage, setMovieListPage }) => {
+const PageNavigator: FC<Props> = ({ page, minPage, maxPage }) => {
+  const pageIncrement = useGameQueryStore((s) => s.pageIncrement);
+  const pageDecrement = useGameQueryStore((s) => s.pageDecrement);
+
   const handlePageIncrement = () => {
-    const lastPage = Math.ceil(totalMovieResult / 10);
-    setMovieListPage((prev) => Math.min(prev + 1, lastPage));
-    scrollToTop();
+    if (page < maxPage) {
+      pageIncrement();
+      scrollToTop();
+    }
   };
 
   const handlePageDecrement = () => {
-    setMovieListPage((prev) => Math.max(prev - 1, 1));
-    scrollToTop();
+    if (page > minPage) {
+      pageDecrement();
+      scrollToTop();
+    }
   };
 
   const scrollToTop = () => {
@@ -35,7 +42,7 @@ const Pages: FC<Props> = ({ totalMovieResult, movieListPage, setMovieListPage })
       <div className="page-arrows" onClick={handlePageDecrement}>
         &#60;
       </div>
-      <div className="page-text">Page ({movieListPage})</div>
+      <div className="page-text">Page ({page})</div>
       <div className="page-arrows" onClick={handlePageIncrement}>
         &#62;
       </div>
@@ -43,4 +50,4 @@ const Pages: FC<Props> = ({ totalMovieResult, movieListPage, setMovieListPage })
   );
 };
 
-export default Pages;
+export default PageNavigator;

@@ -1,5 +1,5 @@
 import { FC } from "react";
-import "./MovieDetails.css";
+import "../styles/MovieDetails.css";
 
 interface Props {
   genre: string | undefined;

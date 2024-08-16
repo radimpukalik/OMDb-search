@@ -1,7 +1,6 @@
 .header-container {
     font-size: 2rem;
     height: 100px;
-    width: 100%;
     color: white;
     position: fixed;
     top: 0;
@@ -11,8 +10,8 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 3rem;
 }
-
 
 .header-top-part-name{
     background-color: rgb(209, 192, 10);
@@ -21,37 +20,31 @@
     font-size: 1.3rem;
     padding: 8px;
     border-radius: 5px;
-    min-width: 103px;
-    margin-left: 20px;
     display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form{
+    flex: 1;
+    max-width: 550px;
+    display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 }
 
 .header-top-part-input{
-    max-width: 550px;
-    width: 80%;
     padding: 10px;
     font-size: 1.2rem;
     border-radius: 5px;
     border: 3px solid rgb(209, 192, 10);
-    flex: 1;
-    margin-left: 50px;
-    margin-right: 50px;
+    width: 100%;
+    box-sizing: border-box;
 }
 
-.header-top-part-favorite-container{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: relative;
-    width: 140px;
-    margin-right: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 .header-top-part-favorite{
+    color: white;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -61,8 +54,20 @@
     justify-content: center;
     cursor: pointer;
 }
+
 .header-top-part-favorite:hover{
     color: rgb(173, 173, 173);
+}
+
+.no-style-link,
+.no-style-link:visited,
+.no-style-link:hover,
+.no-style-link:active {
+  text-decoration: none;
+}
+
+.error-message{
+    font-size: 1rem;
 }
 
 @media (max-width: 580px) {
