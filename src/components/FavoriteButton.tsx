@@ -1,62 +1,40 @@
-import { useQueryClient } from "@tanstack/react-query";
-import { useCallback, useEffect, useState } from "react";
 import { FaHeartCircleMinus, FaHeartCirclePlus } from "react-icons/fa6";
-import MovieDetails from "../entities/MovieDetails";
 import { useMoviesStorage } from "../hooks/useMoviesStorage";
-import APIClient from "../services/api-client";
+import useMovie from "../hooks/useMovie";
 
 interface Props {
   movieId: string;
+  isFavorite: boolean;
+  onFavoriteStatusChange: (isFavorite: boolean) => void;
 }
 
-const FavoriteButton = ({ movieId }: Props) => {
-  const { removeItemById, setItem, getItems } = useMoviesStorage("favorites");
-  const apiClient = new APIClient<MovieDetails>("");
-  const queryClient = useQueryClient();
+const FavoriteButton = ({
+  movieId,
+  isFavorite,
+  onFavoriteStatusChange,
+}: Props) => {
+  const { removeItemById, setItem } = useMoviesStorage("favorites");
+  const { data: movieData, isError, isLoading } = useMovie(movieId);
 
-  const isInFavorite = useCallback(() => {
-    const allFavorites = getItems();
-    return allFavorites.some((favorite) => favorite.imdbID === movieId);
-  }, [getItems, movieId]);
+  const handleFavoriteToggle = async () => {
+    isFavorite ? removeItemById(movieId) : movieData && setItem(movieData);
+    onFavoriteStatusChange(!isFavorite);
+  };
 
-  const [favorite, setFavorite] = useState(isInFavorite);
-
-  useEffect(() => {
-    setFavorite(isInFavorite());
-  }, [isInFavorite]);
-
-  const handleAddToFavorite = useCallback(async () => {
-    try {
-      const movieData = await queryClient.fetchQuery({
-        queryKey: ["movie", movieId],
-        queryFn: () => apiClient.get(movieId),
-        staleTime: 30 * 1000, // 30 seconds
-      });
-      if (movieData) {
-        setItem(movieData);
-        setFavorite(true);
-      }
-    } catch (error) {
-      console.error("Error fetching movie data", error);
-    }
-  }, [movieId, queryClient, setItem]);
-
-  const handleRemoveFromFavorite = useCallback(() => {
-    removeItemById(movieId);
-    setFavorite(false);
-  }, [removeItemById, movieId]);
+  if (isLoading) return <div>Loading...</div>;
+  if (isError) return <div>Error loading movie details</div>;
 
   return (
     <>
-      {!favorite ? (
+      {!isFavorite ? (
         <FaHeartCirclePlus
           style={{ color: "white", fontSize: "24px" }}
-          onClick={handleAddToFavorite}
+          onClick={handleFavoriteToggle}
         />
       ) : (
         <FaHeartCircleMinus
           style={{ color: "red", fontSize: "24px" }}
-          onClick={handleRemoveFromFavorite}
+          onClick={handleFavoriteToggle}
         />
       )}
     </>

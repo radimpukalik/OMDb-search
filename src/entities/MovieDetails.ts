@@ -1,5 +1,7 @@
 export default interface MovieDetails {
+  type: string;
   Title: string;
+  Year: number;
   imdbID: string;
   Poster: string;
   Country: string;
@@ -9,7 +11,7 @@ export default interface MovieDetails {
   Director: string;
   Writer: string;
   Actors: string;
-  Year: number;
   Runtime: number;
   imdbRating: number;
+  totalSeasons: number;
 }

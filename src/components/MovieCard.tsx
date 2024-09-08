@@ -4,6 +4,8 @@ import Movie from "../entities/Movie";
 import MovieDetails from "../entities/MovieDetails";
 import "../styles/MovieList.css";
 import FavoriteButton from "./FavoriteButton";
+import useIsInFavorite from "../hooks/useIsInFavorite";
+import { useState } from "react";
 
 interface Props {
   movie: Movie | MovieDetails;
@@ -11,9 +13,15 @@ interface Props {
 
 const MovieCard = ({ movie }: Props) => {
   const navigate = useNavigate();
+  const { isInFavorite } = useIsInFavorite();
+  const [isFavorite, setIsFavorite] = useState(isInFavorite(movie.imdbID));
+
+  const onFavoriteStatusChange = (newStatus: boolean) => {
+    setIsFavorite(newStatus);
+  };
 
   return (
-    <>
+    <div className={`movie-container ${isFavorite ? "favorite-style" : ""}`}>
       <div
         className="movie-img-container"
         onClick={() => navigate(`/OMDb-search/movie/${movie.imdbID}`)}
@@ -27,9 +35,13 @@ const MovieCard = ({ movie }: Props) => {
       <div className="movie-title-container">{movie.Title}</div>
       <div className="flex">
         <div className="movie-year-container">{movie.Year}</div>
-        <FavoriteButton movieId={movie.imdbID} />
+        <FavoriteButton
+          movieId={movie.imdbID}
+          isFavorite={isFavorite}
+          onFavoriteStatusChange={onFavoriteStatusChange}
+        />
       </div>
-    </>
+    </div>
   );
 };
 

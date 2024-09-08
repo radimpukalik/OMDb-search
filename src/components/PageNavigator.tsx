@@ -1,29 +1,19 @@
+import Pagination from "@mui/material/Pagination";
 import { FC } from "react";
 import useGameQueryStore from "../store";
 import "../styles/MovieList.css";
 
 interface Props {
-  page: number;
-  minPage: number;
   maxPage: number;
 }
 
-const PageNavigator: FC<Props> = ({ page, minPage, maxPage }) => {
-  const pageIncrement = useGameQueryStore((s) => s.pageIncrement);
-  const pageDecrement = useGameQueryStore((s) => s.pageDecrement);
+const PageNavigator: FC<Props> = ({ maxPage }) => {
+  const page = useGameQueryStore((s) => s.gameQuery.page);
+  const setPage = useGameQueryStore((s) => s.setPage);
 
-  const handlePageIncrement = () => {
-    if (page < maxPage) {
-      pageIncrement();
-      scrollToTop();
-    }
-  };
-
-  const handlePageDecrement = () => {
-    if (page > minPage) {
-      pageDecrement();
-      scrollToTop();
-    }
+  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+    setPage(value);
+    scrollToTop();
   };
 
   const scrollToTop = () => {
@@ -37,15 +27,25 @@ const PageNavigator: FC<Props> = ({ page, minPage, maxPage }) => {
     }
   };
 
+  if (!maxPage || maxPage === 1) return null;
+
   return (
     <div className="page-container">
-      <div className="page-arrows" onClick={handlePageDecrement}>
-        &#60;
-      </div>
-      <div className="page-text">Page ({page})</div>
-      <div className="page-arrows" onClick={handlePageIncrement}>
-        &#62;
-      </div>
+      <Pagination
+        count={maxPage}
+        page={page}
+        onChange={handleChange}
+        color="primary" // This will apply a color to the selected page
+        sx={{
+          "& .MuiPaginationItem-root": {
+            color: "white", // Color for the page numbers
+          },
+          "& .MuiPaginationItem-page.Mui-selected": {
+            backgroundColor: "blue", // Background color for the selected page
+            color: "white", // Text color for the selected page
+          },
+        }}
+      />
     </div>
   );
 };

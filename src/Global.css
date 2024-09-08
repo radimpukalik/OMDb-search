@@ -4,7 +4,7 @@ body {
     margin: 0;
     padding: 0; 
     background-color: black;
-    padding-top: 120px;
+    padding-top: 250px;
 }
 
 .header-container {
@@ -13,6 +13,6 @@ body {
 
 @media (max-width: 580px) {
     body {
-        padding-top: 210px;
+        padding-top: 250px;
     }
 }

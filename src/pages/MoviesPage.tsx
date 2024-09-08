@@ -11,18 +11,17 @@ const MoviesPage = () => {
 
   useEffect(() => {
     if (search) setSearchText(search);
-  }, []);
+  }, [search, setSearchText]);
 
   const moviesObject = useMovies();
   const totalResults = moviesObject.data?.totalResults ?? 0;
 
-  const page = useGameQueryStore((s) => s.gameQuery.page) ?? 1;
-  const maxPage = totalResults / 10;
+  const maxPage = Math.ceil(totalResults / 10);
 
   return (
     <>
       <MovieGrid moviesObject={moviesObject} />
-      <PageNavigator page={page} minPage={1} maxPage={maxPage} />
+      <PageNavigator maxPage={maxPage} />
     </>
   );
 };

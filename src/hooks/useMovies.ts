@@ -14,7 +14,9 @@ const useMovies = () => {
       apiClient.getAll({
         params: {
           s: gameQuery.searchText,
+          type: gameQuery.type,
           page: gameQuery.page,
+          y: gameQuery.year,
         },
       }),
     staleTime: 30 * 1000, // 30s
