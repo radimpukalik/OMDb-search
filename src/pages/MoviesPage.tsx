@@ -4,6 +4,7 @@ import MovieGrid from "../components/MovieGrid";
 import PageNavigator from "../components/PageNavigator";
 import useMovies from "../hooks/useMovies";
 import useGameQueryStore from "../store";
+import MovieHeading from "../components/MovieHeading";
 
 const MoviesPage = () => {
   const { search } = useParams();
@@ -20,6 +21,7 @@ const MoviesPage = () => {
 
   return (
     <>
+      <MovieHeading />
       <MovieGrid moviesObject={moviesObject} />
       <PageNavigator maxPage={maxPage} />
     </>

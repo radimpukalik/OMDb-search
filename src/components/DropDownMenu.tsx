@@ -1,4 +1,5 @@
 import { ChangeEvent, FC, useState } from "react";
+import "../styles/components/DropDownMenu.css";
 
 interface Props {
   values: string[];
@@ -16,7 +17,12 @@ const DropdownMenu: FC<Props> = ({ values, onChange }) => {
 
   return (
     <>
-      <select id="dropdown" value={selectedOption} onChange={handleChange}>
+      <select
+        id="dropdown"
+        value={selectedOption}
+        onChange={handleChange}
+        className="dropdownmenu"
+      >
         {values.map((value, index) => (
           <option key={index} value={value}>
             {value}

@@ -1,7 +1,7 @@
 import Pagination from "@mui/material/Pagination";
 import { FC } from "react";
 import useGameQueryStore from "../store";
-import "../styles/MovieList.css";
+import "../styles/components/PageNavigator.css";
 
 interface Props {
   maxPage: number;
@@ -35,14 +35,25 @@ const PageNavigator: FC<Props> = ({ maxPage }) => {
         count={maxPage}
         page={page}
         onChange={handleChange}
-        color="primary" // This will apply a color to the selected page
         sx={{
           "& .MuiPaginationItem-root": {
-            color: "white", // Color for the page numbers
+            color: "var(--text-main)", // Default text color for pagination numbers
           },
           "& .MuiPaginationItem-page.Mui-selected": {
-            backgroundColor: "blue", // Background color for the selected page
-            color: "white", // Text color for the selected page
+            backgroundColor: "#FFC107", // Yellow background for the selected page
+            color: "black", // Black text for the selected page
+            border: "2px solid transparent", // Match the navbar button border style
+          },
+          "& .MuiPaginationItem-page": {
+            "&:hover": {
+              backgroundColor: "#FFA000", // Darker yellow on hover
+              borderColor: "#FFA000", // Border color on hover
+              color: "black", // Keep the text black
+            },
+            "&:focus": {
+              outline: "none",
+              boxShadow: "0 0 0.5rem rgba(255, 193, 7, 0.5)", // Focus shadow similar to navbar
+            },
           },
         }}
       />

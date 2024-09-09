@@ -3,6 +3,7 @@ import useGameQueryStore from "../store";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
+import "../styles/components/YearInput.css";
 
 // Get the current year
 const currentYear = new Date().getFullYear();
@@ -21,6 +22,7 @@ const schema = z.object({
 type FormData = z.infer<typeof schema>;
 
 const YearInput = () => {
+  const setPage = useGameQueryStore((s) => s.setPage);
   const { register, handleSubmit, setValue, reset } = useForm<FormData>({
     resolver: zodResolver(schema),
     defaultValues: { year: undefined },
@@ -38,7 +40,7 @@ const YearInput = () => {
 
   const onSubmit = (data: FormData) => {
     setParamYear(data.year);
-    console.log("submit");
+    setPage(1);
   };
 
   const handleReset = () => {
@@ -51,24 +53,22 @@ const YearInput = () => {
     : `Enter a year between ${minYear} and ${maxYear}`;
 
   return (
-    <div>
-      <form onSubmit={handleSubmit(onSubmit)}>
-        <input
-          className="form-test"
-          type="number"
-          min={minYear}
-          max={maxYear}
-          placeholder={yearPlaceholder}
-          {...register("year")}
-        />
-        <button type="submit" style={{ display: "none" }} />
-        {yearParam && (
-          <button type="button" onClick={handleReset}>
-            Reset Year
-          </button>
-        )}
-      </form>
-    </div>
+    <form onSubmit={handleSubmit(onSubmit)} className="year-input-form">
+      <input
+        className="year-form"
+        type="number"
+        min={minYear}
+        max={maxYear}
+        placeholder={yearPlaceholder}
+        {...register("year")}
+      />
+      <button type="submit" style={{ display: "none" }} />
+      {yearParam && (
+        <button type="button" onClick={handleReset} className="year-button">
+          Reset Year
+        </button>
+      )}
+    </form>
   );
 };
 

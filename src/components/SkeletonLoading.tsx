@@ -4,18 +4,18 @@ export default function SkeletonLoading() {
   return (
     <Card
       sx={{
-        width: 220,
+        width: 280,
         backgroundColor: "#424242",
         borderRadius: 2,
-        overflow: "hidden", // Ensures smooth edges and no overflow
-        boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)", // Light shadow for better aesthetics
+        overflow: "hidden",
+        boxShadow: "0px 2px 10px rgba(0, 0, 0, 0.1)",
       }}
     >
-      <Box sx={{ position: "relative", width: 220, height: 350 }}>
+      <Box sx={{ position: "relative", width: "100%", height: 350 }}>
         {/* Main Image Skeleton */}
         <Skeleton
           variant="rectangular"
-          width={220}
+          width={280}
           height={350}
           sx={{ backgroundColor: "#424242" }}
         />
@@ -23,7 +23,7 @@ export default function SkeletonLoading() {
         {/* Middle Rectangle Skeleton (overlayed) */}
         <Skeleton
           variant="rectangular"
-          width={180}
+          width={230}
           height={300}
           sx={{
             backgroundColor: "#a6a6a6",
@@ -31,8 +31,8 @@ export default function SkeletonLoading() {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            borderRadius: "8px", // Slightly rounded corners
-            boxShadow: "0px 1px 8px rgba(0, 0, 0, 0.2)", // Adds some depth to the rectangle
+            borderRadius: "8px",
+            boxShadow: "0px 1px 8px rgba(0, 0, 0, 0.2)",
           }}
         />
       </Box>

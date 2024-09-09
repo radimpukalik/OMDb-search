@@ -1,0 +1,14 @@
+.navbar-mobile-container-top{
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.navbar-mobile-container-top-top{
+  display: flex;
+  justify-content: space-between;
+}
+
+.navbar-mobile-container-top-bottom{
+  margin: 1rem;
+}

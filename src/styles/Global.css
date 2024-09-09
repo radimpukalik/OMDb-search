@@ -1,0 +1,108 @@
+:root {
+    --background-primary: #202124;
+    --background-secondary: #2A2B2E;
+    --primary: #383838;
+    --primary-lighter: #4A4A4A;
+    --secondary: #606060;
+    --text-main: #FFFFFF;
+    --text: #CBD5E1;
+    --input-border: #4A4A4A; 
+    --input-border-focus: #6C6C6C;
+    
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+    line-height: 1.5;
+    font-weight: 400;
+  
+    color: rgba(255, 255, 255, 0.87);
+    background-color: var(--background-primary);
+    
+    font-synthesis: none;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0 1rem; 
+    padding-top: 170px;
+    max-width: 1536px;
+    margin: 0 auto;
+}
+
+a {
+    color: var(--text-main);
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    color: var(--primary-lighter);
+    text-decoration: underline;
+}
+
+button {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    background: var(--primary);
+    color: var(--text-main);
+    border: none;
+    border-radius: 4px;
+    padding: 8px 16px;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+button:hover {
+    background: var(--primary-lighter);
+}
+
+button:disabled {
+    background: var(--secondary);
+    cursor: not-allowed;
+}
+
+input, textarea, select {
+    font-family: inherit;
+    font-size: inherit;
+    line-height: inherit;
+    background: var(--background-secondary);
+    color: var(--text-main);
+    border: 2px solid var(--input-border); 
+    border-radius: 4px;
+    padding: 8px;
+    box-sizing: border-box;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+input:focus, textarea:focus, select:focus {
+    border-color: var(--input-border-focus);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(100, 100, 100, 0.3); 
+}
+
+.container {
+    max-width: 1536px;
+    margin: 0 auto;
+    padding: 0 16px;
+}
+
+.flex-center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1, h2 {
+    margin: 0 0 16px 0;
+    font-weight: 600;
+}
+
+h1 {
+    font-size: 2rem;
+}
+
+h2 {
+    font-size: 1.75rem;
+}

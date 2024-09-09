@@ -1,4 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
+const apiKey = import.meta.env.VITE_OMDB_KEY;
 
 export interface FetchResponse<T> {
   Search: T[];
@@ -9,7 +10,7 @@ export interface FetchResponse<T> {
 const axiosInstance = axios.create({
   baseURL: "http://www.omdbapi.com",
   params: {
-    apikey: "d318cf92",
+    apikey: apiKey,
   },
 });
 

@@ -1,42 +1,56 @@
-import { Link } from "react-router-dom";
-import "../styles/Header.css";
+import { Link, useMatch } from "react-router-dom";
+import "../styles/components/NavBar.css";
+import NavBarFilters from "./NavBarFilters";
 import SearchInput from "./SearchInput";
-import DropdownMenu from "./DropDownMenu";
-import useGameQueryStore from "../store";
-import { QueryTypes } from "../store";
-import YearInput from "./YearInput";
-import MovieHeading from "./MovieHeading";
+import NavBarMobile from "./NavBarMobile";
+import { useEffect, useState } from "react";
 
 const NavBar = () => {
-  const setType = useGameQueryStore((s) => s.setType);
+  const match = useMatch("OMDb-search/search/:id");
+  const [windowWidth, setWindowWidth] = useState(window.innerWidth);
 
-  const onChange = (changedValue: string) => {
-    setType(changedValue as QueryTypes);
-  };
+  useEffect(() => {
+    const handleResize = () => {
+      setWindowWidth(window.innerWidth);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  if (windowWidth > 768) {
+    match
+      ? (document.body.style.paddingTop = "170px")
+      : (document.body.style.paddingTop = "110px");
+  } else {
+    match
+      ? (document.body.style.paddingTop = "310px")
+      : (document.body.style.paddingTop = "180px");
+  }
 
   return (
     <>
-      <div className="header-container">
-        <div className="header-container-test-top ">
-          <Link to="/OMDb-search/" className="no-style-link">
-            <div className="header-top-part-name no-style-link">OMDb API</div>
-          </Link>
+      <div className="navbar-container">
+        {windowWidth > 768 ? (
+          <div className="navbar-container-top">
+            <Link to="/OMDb-search/">
+              <button className="navbar-container-button">OMDb API</button>
+            </Link>
 
-          <SearchInput />
+            <SearchInput />
 
-          <Link to="/OMDb-search/favorites" className="no-style-link">
-            <div className="header-top-part-favorite">Favorites</div>
-          </Link>
-        </div>
+            <Link to="/OMDb-search/favorites">
+              <button className="navbar-container-button">Favorites</button>
+            </Link>
+          </div>
+        ) : (
+          <NavBarMobile />
+        )}
 
-        <div className="header-container-test-bottom">
-          <MovieHeading />
-        </div>
-
-        <div className="header-container-test-bottom">
-          <DropdownMenu values={["movie", "series"]} onChange={onChange} />
-          <YearInput />
-        </div>
+        {match && <NavBarFilters />}
       </div>
     </>
   );

@@ -1,0 +1,14 @@
+.year-input-form{
+  width: 300px;
+  display: flex;
+  align-items: center;
+}
+
+.year-form {
+  flex: 1;
+}
+
+.year-button{
+  margin-left: 0.2rem;
+  border: 2px solid var(--input-border);
+}

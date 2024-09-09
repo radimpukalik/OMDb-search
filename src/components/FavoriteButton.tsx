@@ -1,6 +1,8 @@
 import { FaHeartCircleMinus, FaHeartCirclePlus } from "react-icons/fa6";
 import { useMoviesStorage } from "../hooks/useMoviesStorage";
 import useMovie from "../hooks/useMovie";
+import "../styles/components/FavoriteButton.css";
+import { useState } from "react";
 
 interface Props {
   movieId: string;
@@ -15,6 +17,7 @@ const FavoriteButton = ({
 }: Props) => {
   const { removeItemById, setItem } = useMoviesStorage("favorites");
   const { data: movieData, isError, isLoading } = useMovie(movieId);
+  const [isHovered, setIsHovered] = useState(false);
 
   const handleFavoriteToggle = async () => {
     isFavorite ? removeItemById(movieId) : movieData && setItem(movieData);
@@ -28,13 +31,19 @@ const FavoriteButton = ({
     <>
       {!isFavorite ? (
         <FaHeartCirclePlus
-          style={{ color: "white", fontSize: "24px" }}
+          style={{ color: "white" }}
+          className={`favorite-icon ${isHovered ? "hovered" : ""}`}
           onClick={handleFavoriteToggle}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         />
       ) : (
         <FaHeartCircleMinus
-          style={{ color: "red", fontSize: "24px" }}
+          style={{ color: "red" }}
+          className={`favorite-icon ${isHovered ? "hovered" : ""}`}
           onClick={handleFavoriteToggle}
+          onMouseEnter={() => setIsHovered(true)}
+          onMouseLeave={() => setIsHovered(false)}
         />
       )}
     </>

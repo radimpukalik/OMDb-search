@@ -1,11 +1,12 @@
 import { FormEvent, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import useGameQueryStore from "../store";
-import "../styles/Header.css";
+import "../styles/components/SearchInput.css";
 
 const SearchInput = () => {
   const ref = useRef<HTMLInputElement>(null);
   const setSearchText = useGameQueryStore((s) => s.setSearchText);
+  const setPage = useGameQueryStore((s) => s.setPage);
   const navigate = useNavigate();
 
   const handleSubmit = (e: FormEvent) => {
@@ -18,15 +19,12 @@ const SearchInput = () => {
         navigate("/OMDb-search/");
       }
     }
+    setPage(1);
   };
 
   return (
-    <form className="form" onSubmit={(e) => handleSubmit(e)}>
-      <input
-        className="header-top-part-input"
-        placeholder={"Enter to search ..."}
-        ref={ref}
-      />
+    <form className="input-form" onSubmit={(e) => handleSubmit(e)}>
+      <input className="input" placeholder={"Enter to search ..."} ref={ref} />
     </form>
   );
 };

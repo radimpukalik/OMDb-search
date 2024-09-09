@@ -1,0 +1,17 @@
+.movie-details-genre-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem
+}
+
+.movie-details-genre {
+  display: flex;
+  color: black;
+  background-color: rgb(209, 192, 10);
+  font-weight: bold;
+  font-size: 1rem;
+  margin-left: 10px;
+  padding: 6px;
+  border-radius: 8px;
+}

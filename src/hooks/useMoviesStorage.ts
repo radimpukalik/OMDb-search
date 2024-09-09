@@ -22,8 +22,9 @@ export const useMoviesStorage = (key: string) => {
         if (exists) {
           return;
         }
-        const updatedItems = [...currentItems, item];
+        const updatedItems = [item, ...currentItems];
         window.localStorage.setItem(key, JSON.stringify(updatedItems));
+        window.dispatchEvent(new Event("favoritesUpdated")); // Dispatch event on update
       } catch (error) {
         console.error("Error setting local storage item", error);
       }
@@ -39,6 +40,7 @@ export const useMoviesStorage = (key: string) => {
           (item) => item.imdbID !== itemId
         );
         window.localStorage.setItem(key, JSON.stringify(updatedItems));
+        window.dispatchEvent(new Event("favoritesUpdated")); // Dispatch event on removal
       } catch (error) {
         console.error("Error removing local storage item", error);
       }
@@ -49,6 +51,7 @@ export const useMoviesStorage = (key: string) => {
   const removeAllItems = useCallback(() => {
     try {
       window.localStorage.removeItem(key);
+      window.dispatchEvent(new Event("favoritesUpdated")); // Dispatch event on clear
     } catch (error) {
       console.error("Error removing all items from local storage", error);
     }

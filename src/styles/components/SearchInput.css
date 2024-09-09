@@ -1,0 +1,18 @@
+.input-form{
+  flex-grow: 1;
+}
+
+.input {
+  width: 100%;
+  border: 0.2rem solid #FFD700; 
+  background-color: white; 
+  color: black;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.input:focus {
+  border-color: #FFC107; 
+  background-color: white; 
+  box-shadow: 0 0 0.5rem rgba(255, 193, 7, 0.5); 
+  outline: none;
+}

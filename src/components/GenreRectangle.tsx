@@ -1,5 +1,5 @@
 import { FC } from "react";
-import "../styles/MovieDetails.css";
+import "../styles/components/GenreRectangle.css";
 
 interface Props {
   genre: string | undefined;
