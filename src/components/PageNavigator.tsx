@@ -11,7 +11,7 @@ const PageNavigator: FC<Props> = ({ maxPage }) => {
   const page = useGameQueryStore((s) => s.gameQuery.page);
   const setPage = useGameQueryStore((s) => s.setPage);
 
-  const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
+  const handleChange = (_: React.ChangeEvent<unknown>, value: number) => {
     setPage(value);
     scrollToTop();
   };

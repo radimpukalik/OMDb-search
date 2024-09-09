@@ -8,7 +8,7 @@ export interface FetchResponse<T> {
 }
 
 const axiosInstance = axios.create({
-  baseURL: "http://www.omdbapi.com",
+  baseURL: "https://www.omdbapi.com",
   params: {
     apikey: apiKey,
   },
