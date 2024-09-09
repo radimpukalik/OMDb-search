@@ -1,6 +1,5 @@
 import axios, { AxiosRequestConfig } from "axios";
 const apiKey = import.meta.env.VITE_OMDB_KEY;
-
 export interface FetchResponse<T> {
   Search: T[];
   totalResults: number;
